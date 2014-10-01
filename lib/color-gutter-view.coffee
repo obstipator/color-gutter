@@ -70,6 +70,10 @@ class ColorGutterView
   markLine: (line, color) ->
     marker = @editor.markBufferPosition([line, 0], invalidate: 'never')
     @editor.decorateMarker(marker, type: 'gutter', class: 'color-gutter')
-    @editorView.find('.line-number-' + line).css({ 'border-right-color': color })
+    # @editorView.find('.line-number-' + line).css({ 'border-right-color': color })
+    $line = @editorView.find('.line-number-' + line)
+    $line.find('.line-color-value').remove()
+    $line_color_value = '<span class="line-color-value" style="background: ' + color + '">' #$('<span>').addClass('line-color-value').css({background: color})
+    $line.append($line_color_value)
     @markers ?= []
     @markers.push marker
